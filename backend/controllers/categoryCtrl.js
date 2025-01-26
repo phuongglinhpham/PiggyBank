@@ -1,14 +1,12 @@
 const asyncHandler = require("express-async-handler");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../model/User");
+const Category = require("../model/Category");
 
 const categoryController = {
     //Add
     create: asyncHandler(async (req, res) => {
         const { name, type } = req.body;
         if (!name || !type) {
-            throw new Error('Name and type are required for creating a category')
+            throw new Error('Name and type are required for creating a category');
         }
         //Convert the name to lowercase
         const normalizedName = name.toLowerCase();
@@ -37,7 +35,7 @@ const categoryController = {
     }),
 
     //Lists
-    lists: asyncHandler(async (req, rec) => {
+    lists: asyncHandler(async (req, res) => {
         const categories = await Category.find({ user: req.user });
         res.status(200).json(categories);
     }),
