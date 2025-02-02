@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const userRouter = require("./routes/userRouter");
 const errorHandler = require("./middlewares/errorHandlerMiddleware");
 const categoryRouter = require("./routes/categoryRouter");
@@ -11,6 +12,11 @@ mongoose
     .then(() => console.log("DB Connected"))
     .catch((e) => console.log(e));
 
+//Cors config
+const corsOptions = {
+    origin: ["http://localhost:5173"],
+};
+app.use(cors(corsOptions));
 //!Middlewares
 app.use(express.json()); //?Pass incoming json data
 //!Routes
